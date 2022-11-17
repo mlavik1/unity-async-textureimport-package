@@ -13,6 +13,7 @@ jobs:
         submodules: true
     - name: Build FreeImage
       run: |
+        apt install cmake
         chmod a+x scripts/build-android.py
         python scripts/build-android.py /opt/unity/Editor/Unity
       shell: bash
