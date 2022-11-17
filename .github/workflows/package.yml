@@ -13,9 +13,7 @@ jobs:
         submodules: true
     - name: Build FreeImage
       run: |
-        chmod a+x scripts/build-android.sh
-        ./scripts/build-android.sh
-        echo "Activation done. Packaging..."
+        chmod a+x scripts/build-android.py
         python scripts/build-android.py /opt/unity/Editor/Unity
       shell: bash
     - uses: actions/upload-artifact@v3
