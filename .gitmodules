@@ -1,0 +1,6 @@
+[submodule "unity-async-textureimport"]
+	path = unity-async-textureimport
+	url = https://codeberg.org/matiaslavik/unity-async-textureimport
+[submodule "FreeImage"]
+	path = FreeImage
+	url = https://github.com/mlavik1/FreeImage-Cmake

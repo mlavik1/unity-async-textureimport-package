@@ -1,0 +1,24 @@
+name: Package
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: unityci/editor:ubuntu-2021.3.9f1-base-1.0.1
+    steps:
+    - uses: actions/checkout@v1
+      with: 
+        submodules: true
+    - name: Build FreeImage
+      run: |
+        chmod a+x scripts/build-android.sh
+        ./scripts/build-android.sh
+        echo "Activation done. Packaging..."
+        python scripts/build-android.py /opt/unity/Editor/Unity
+      shell: bash
+    - uses: actions/upload-artifact@v3
+      with:
+        name: libFreeImage.so
+        path: build/libFreeImage.so
