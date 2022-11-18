@@ -12,7 +12,7 @@ jobs:
     - name: Build FreeImage
       run: |
         chmod a+x scripts/build-android.py
-        python scripts/build-android.py /opt/unity/Editor/Unity
+        python scripts/build-android.py /opt/unity/Editor
       shell: bash
     - uses: actions/upload-artifact@v3
       with:
