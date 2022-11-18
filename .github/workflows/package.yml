@@ -13,8 +13,8 @@ jobs:
         submodules: true
     - name: Build FreeImage
       run: |
-        sudo apt install cmake
-        sudo apt install build-essential
+        apt install cmake -y
+        apt install build-essential -y
         chmod a+x scripts/build-android.py
         python scripts/build-android.py /opt/unity/Editor
       shell: bash
