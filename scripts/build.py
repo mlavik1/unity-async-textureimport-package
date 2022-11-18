@@ -11,7 +11,7 @@ def build(build_folder):
     -DCMAKE_BUILD_TYPE=Release \
     -DFREEIMAGE_LIB=OFF \
     -DSUPPORT_FMT_TIFF=ON \
-    -DSUPPORT_FMT_JPEG=ON""")
+    -DSUPPORT_FMT_JPEG=ON"""
 
   os.system(cmd_configure)
   os.system("cmake --build .")
