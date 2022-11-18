@@ -22,7 +22,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         title: Binaries
-          - name: arm64-v8a
+          - name: "arm64-v8a"
           files: [ "build-arm64-v8a/libFreeImage.so" ]
-          - name: armeabi-v7a
+          - name: "armeabi-v7a"
           files: [ "build-armeabi-v7a/libFreeImage.so" ]
