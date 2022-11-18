@@ -3,7 +3,7 @@ name: Package
 on: [push, pull_request]
 
 jobs:
-  build:
+  build-freeimage-android:
     runs-on: ubuntu-latest
     container:
       image: unityci/editor:ubuntu-2021.3.14f1-android-1.0.1
@@ -27,4 +27,20 @@ jobs:
       with:
         name: "armeabi-v7a"
         path: build-armeabi-v7a/libFreeImage.so
-
+  build-freeimage-ubuntu:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu/16.04
+    steps:
+    - uses: actions/checkout@v1
+      with: 
+        submodules: true
+    - name: Build FreeImage
+      run: |
+        chmod a+x scripts/build.py
+        python scripts/build.py
+      shell: bash
+    - uses: actions/upload-artifact@v3
+      with:
+        name: "arm64-v8a"
+        path: build-arm64-v8a/libFreeImage.so
