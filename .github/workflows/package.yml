@@ -59,6 +59,10 @@ jobs:
       with:
         name: armeabi-v7a
         path: binaries/armeabi-v7a
+    - uses: actions/download-artifact@master
+      with:
+        name: ubuntu-16.04
+        path: binaries/linux
     - name: Package
       run: |
         chmod a+x scripts/ci/activate-license.sh
