@@ -39,6 +39,8 @@ os.mkdir(os.path.join(freeImage_bin_dir, "Android", "arm64-v8a"))
 copy_filedir(os.path.join("binaries", "arm64-v8a", "libFreeImage.so"), os.path.join(freeImage_bin_dir, "Android", "arm64-v8a", "libFreeImage.so"))
 os.mkdir(os.path.join(freeImage_bin_dir, "Android", "armeabi-v7a"))
 copy_filedir(os.path.join("binaries", "armeabi-v7a", "libFreeImage.so"), os.path.join(freeImage_bin_dir, "Android", "armeabi-v7a", "libFreeImage.so"))
+os.mkdir(os.path.join(freeImage_bin_dir, "Linux"))
+copy_filedir(os.path.join("binaries", "Linux", "libFreeImage.so"), os.path.join(freeImage_bin_dir, "Linux", "libFreeImage.so"))
 
 command_string = "\"{unity_path}\" -projectPath {project_path} -exportPackage Assets {package_name} -batchmode -nographics -silent-crashes -quit".format(unity_path=unity_path, project_path=export_project_path, package_name=package_name)
 # Run through cvfb if no display available (building in container, etc.).
