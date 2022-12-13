@@ -76,3 +76,37 @@ jobs:
       with:
         name: UnityAsyncTextureImport-Unity-2021.unitypackage
         path: UnityAsyncTextureImport.unitypackage
+  package-unity-2022-3:
+    needs: build-freeimage-android
+    runs-on: ubuntu-latest
+    container:
+      image: unityci/editor:ubuntu-2022.2.0f1-base-1.0.1
+    steps:
+    - uses: actions/checkout@v1
+      with: 
+        submodules: true
+    - uses: actions/download-artifact@master
+      with:
+        name: arm64-v8a
+        path: binaries/arm64-v8a
+    - uses: actions/download-artifact@master
+      with:
+        name: armeabi-v7a
+        path: binaries/armeabi-v7a
+    - uses: actions/download-artifact@master
+      with:
+        name: ubuntu-16.04
+        path: binaries/linux
+    - name: Package
+      run: |
+        chmod a+x scripts/ci/activate-license.sh
+        ./scripts/ci/activate-license.sh
+        echo "Packaging..."
+        python scripts/export-unity-package.py /opt/unity/Editor/Unity -nodisplay
+      shell: bash
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_BASE64 }}
+    - uses: actions/upload-artifact@v3
+      with:
+        name: UnityAsyncTextureImport-Unity-2022.unitypackage
+        path: UnityAsyncTextureImport.unitypackage
