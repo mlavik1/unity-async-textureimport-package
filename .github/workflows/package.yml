@@ -3,7 +3,7 @@ name: Package
 on: [push, pull_request]
 
 jobs:
-  build-freeimage-android:
+  build-freeimage-android-unity-2021:
     runs-on: ubuntu-latest
     container:
       image: unityci/editor:ubuntu-2021.3.14f1-android-1.0.1
@@ -21,11 +21,35 @@ jobs:
       shell: bash
     - uses: actions/upload-artifact@v3
       with:
-        name: "arm64-v8a"
+        name: "arm64-v8a-unity-2021"
         path: build-arm64-v8a/libFreeImage.so
     - uses: actions/upload-artifact@v3
       with:
-        name: "armeabi-v7a"
+        name: "armeabi-v7a-unity-2021"
+        path: build-armeabi-v7a/libFreeImage.so
+  build-freeimage-android-unity-2022:
+    runs-on: ubuntu-latest
+    container:
+      image: unityci/editor:ubuntu-2022.2.0f1-base-1.0.1
+    steps:
+    - uses: actions/checkout@v1
+      with: 
+        submodules: true
+    - name: Build FreeImage
+      run: |
+        apt update -y
+        apt install cmake -y
+        apt install build-essential -y
+        chmod a+x scripts/build-android.py
+        python scripts/build-android.py /opt/unity/Editor
+      shell: bash
+    - uses: actions/upload-artifact@v3
+      with:
+        name: "arm64-v8a-unity-2022"
+        path: build-arm64-v8a/libFreeImage.so
+    - uses: actions/upload-artifact@v3
+      with:
+        name: "armeabi-v7a-unity-2022"
         path: build-armeabi-v7a/libFreeImage.so
   build-freeimage-ubuntu:
     runs-on: ubuntu-18.04
@@ -43,7 +67,7 @@ jobs:
         name: "ubuntu-16.04"
         path: build/libFreeImage.so
   package-unity-2021-3:
-    needs: build-freeimage-android
+    needs: build-freeimage-android-unity-2021
     runs-on: ubuntu-latest
     container:
       image: unityci/editor:ubuntu-2021.3.9f1-base-1.0.1
@@ -53,11 +77,11 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@master
       with:
-        name: arm64-v8a
+        name: arm64-v8a-unity-2021
         path: binaries/arm64-v8a
     - uses: actions/download-artifact@master
       with:
-        name: armeabi-v7a
+        name: armeabi-v7a-unity-2021
         path: binaries/armeabi-v7a
     - uses: actions/download-artifact@master
       with:
@@ -77,7 +101,7 @@ jobs:
         name: UnityAsyncTextureImport-Unity-2021.unitypackage
         path: UnityAsyncTextureImport.unitypackage
   package-unity-2022-3:
-    needs: build-freeimage-android
+    needs: build-freeimage-android-unity-2022
     runs-on: ubuntu-latest
     container:
       image: unityci/editor:ubuntu-2022.2.0f1-base-1.0.1
@@ -87,11 +111,11 @@ jobs:
         submodules: true
     - uses: actions/download-artifact@master
       with:
-        name: arm64-v8a
+        name: arm64-v8a-unity-2022
         path: binaries/arm64-v8a
     - uses: actions/download-artifact@master
       with:
-        name: armeabi-v7a
+        name: armeabi-v7a-unity-2022
         path: binaries/armeabi-v7a
     - uses: actions/download-artifact@master
       with:
