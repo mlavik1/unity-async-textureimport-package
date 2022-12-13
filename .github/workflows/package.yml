@@ -30,7 +30,7 @@ jobs:
   build-freeimage-android-unity-2022:
     runs-on: ubuntu-latest
     container:
-      image: unityci/editor:ubuntu-2022.2.0f1-base-1.0.1
+      image: unityci/editor:ubuntu-2022.2.0f1-android-1.0.1
     steps:
     - uses: actions/checkout@v1
       with: 
@@ -98,9 +98,9 @@ jobs:
         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_BASE64 }}
     - uses: actions/upload-artifact@v3
       with:
-        name: UnityAsyncTextureImport-Unity-2021.unitypackage
+        name: UnityAsyncTextureImport-Unity-2021.3.unitypackage
         path: UnityAsyncTextureImport.unitypackage
-  package-unity-2022-3:
+  package-unity-2022-2:
     needs: build-freeimage-android-unity-2022
     runs-on: ubuntu-latest
     container:
@@ -132,5 +132,5 @@ jobs:
         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_BASE64 }}
     - uses: actions/upload-artifact@v3
       with:
-        name: UnityAsyncTextureImport-Unity-2022.unitypackage
+        name: UnityAsyncTextureImport-Unity-2022.2.unitypackage
         path: UnityAsyncTextureImport.unitypackage
